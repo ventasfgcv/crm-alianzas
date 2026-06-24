@@ -1,0 +1,1890 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CRM Alianzas — GFA Sumiya</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:       #1A1612;
+  --ink2:      #2E2820;
+  --paper:     #F7F4EE;
+  --paper2:    #EDE9E1;
+  --paper3:    #E4DFD5;
+  --rule:      #D5CFC4;
+  --gold:      #B8973A;
+  --gold-l:    #D4AF5A;
+  --gold-ll:   #F0D898;
+  --gold-bg:   rgba(184,151,58,.10);
+  --gold-bd:   rgba(184,151,58,.30);
+  --green:     #2E7D52;
+  --green-bg:  rgba(46,125,82,.10);
+  --green-bd:  rgba(46,125,82,.28);
+  --red:       #B53B3B;
+  --red-bg:    rgba(181,59,59,.09);
+  --red-bd:    rgba(181,59,59,.25);
+  --blue:      #2B5FA8;
+  --blue-bg:   rgba(43,95,168,.09);
+  --blue-bd:   rgba(43,95,168,.25);
+  --amber:     #C47A1A;
+  --amber-bg:  rgba(196,122,26,.10);
+  --amber-bd:  rgba(196,122,26,.28);
+  --muted:     #7A7168;
+  --soft:      #A09282;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  min-height: 100vh;
+}
+
+/* ── HEADER ─────────────────────────────────────────── */
+header {
+  background: var(--ink);
+  padding: 0 28px;
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  border-bottom: 3px solid var(--gold);
+}
+.hdr-brand {
+  padding: 16px 24px 16px 0;
+  border-right: 1px solid rgba(255,255,255,.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.hdr-title {
+  font-family: "DM Serif Display", serif;
+  font-size: 1.4rem;
+  color: var(--gold-ll);
+  letter-spacing: .02em;
+  line-height: 1;
+}
+.hdr-sub {
+  font-size: .65rem;
+  color: rgba(255,255,255,.4);
+  letter-spacing: .8px;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+.hdr-meta {
+  padding: 16px 0 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+}
+.hdr-stat {
+  text-align: center;
+}
+.hdr-stat-val {
+  font-family: "DM Serif Display", serif;
+  font-size: 1.6rem;
+  color: var(--gold-ll);
+  line-height: 1;
+}
+.hdr-stat-lbl {
+  font-size: .6rem;
+  color: rgba(255,255,255,.4);
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  margin-top: 2px;
+}
+.hdr-divider {
+  width: 1px;
+  background: rgba(255,255,255,.1);
+  align-self: stretch;
+  margin: 12px 0;
+}
+.hdr-week {
+  margin-left: auto;
+  padding: 10px 16px;
+  background: var(--gold-bg);
+  border: 1px solid var(--gold-bd);
+  border-radius: 8px;
+  font-size: .7rem;
+  color: var(--gold-ll);
+  font-weight: 600;
+  align-self: center;
+  white-space: nowrap;
+}
+
+/* ── NAV ─────────────────────────────────────────────── */
+nav {
+  background: var(--ink2);
+  padding: 0 28px;
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+}
+.nav-btn {
+  font-family: "DM Sans", sans-serif;
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  padding: 12px 18px;
+  border: none;
+  background: none;
+  color: rgba(255,255,255,.4);
+  cursor: pointer;
+  position: relative;
+  white-space: nowrap;
+  transition: color .2s;
+}
+.nav-btn::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0; right: 0;
+  height: 2px;
+  background: transparent;
+  transition: background .2s;
+}
+.nav-btn:hover { color: rgba(255,255,255,.7); }
+.nav-btn.act { color: var(--gold-ll); }
+.nav-btn.act::after { background: var(--gold); }
+.nav-badge {
+  display: inline-block;
+  background: var(--red);
+  color: #fff;
+  font-size: .5rem;
+  padding: 1px 4px;
+  border-radius: 8px;
+  margin-left: 4px;
+  vertical-align: middle;
+  font-weight: 700;
+}
+
+/* ── MAIN ────────────────────────────────────────────── */
+main {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 24px 28px 60px;
+}
+.page { display: none; }
+.page.act { display: block; }
+
+/* ── SECTION ─────────────────────────────────────────── */
+.sec-title {
+  font-family: "DM Serif Display", serif;
+  font-size: 1.1rem;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.sec-sub {
+  font-size: .68rem;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+.sec-rule {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: .62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
+  margin: 24px 0 12px;
+}
+.sec-rule::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+
+/* ── GRIDS ───────────────────────────────────────────── */
+.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.g4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-bottom: 14px; }
+.g5 { display: grid; grid-template-columns: repeat(5,1fr); gap: 12px; margin-bottom: 18px; }
+
+/* ── KPI CARD ────────────────────────────────────────── */
+.kpi {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 16px 18px;
+  position: relative;
+  overflow: hidden;
+}
+.kpi::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+.kpi.k-gold::before  { background: linear-gradient(90deg, var(--gold), var(--gold-l)); }
+.kpi.k-green::before { background: var(--green); }
+.kpi.k-red::before   { background: var(--red); }
+.kpi.k-blue::before  { background: var(--blue); }
+.kpi.k-amber::before { background: var(--amber); }
+.kpi-lbl { font-size: .58rem; text-transform: uppercase; letter-spacing: .9px; color: var(--muted); margin-bottom: 5px; }
+.kpi-val { font-family: "DM Serif Display", serif; font-size: 2.2rem; line-height: 1; color: var(--ink); }
+.kpi-val.gold  { color: var(--gold); }
+.kpi-val.green { color: var(--green); }
+.kpi-val.red   { color: var(--red); }
+.kpi-val.blue  { color: var(--blue); }
+.kpi-val.amber { color: var(--amber); }
+.kpi-sub { font-size: .62rem; color: var(--muted); margin-top: 5px; }
+
+/* ── PIPELINE CARD ───────────────────────────────────── */
+.pipe-card {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: box-shadow .15s, border-color .15s;
+}
+.pipe-card:hover {
+  border-color: var(--gold-bd);
+  box-shadow: 0 4px 16px rgba(0,0,0,.06);
+}
+.pipe-card-hd {
+  padding: 12px 14px 10px;
+  border-bottom: 1px solid var(--paper2);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+.pipe-name {
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.3;
+}
+.pipe-meta {
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.pipe-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: .64rem;
+}
+.pipe-row-lbl { color: var(--muted); }
+.pipe-row-val {
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 500;
+  color: var(--ink2);
+  font-size: .62rem;
+}
+.pipe-footer {
+  padding: 8px 14px;
+  border-top: 1px solid var(--paper2);
+  background: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.pipe-notes-input {
+  flex: 1;
+  background: none;
+  border: none;
+  font-size: .65rem;
+  color: var(--ink2);
+  font-family: "DM Sans", sans-serif;
+  outline: none;
+  placeholder-color: var(--muted);
+}
+.pipe-notes-input::placeholder { color: var(--soft); }
+
+/* ── STATUS PILL ─────────────────────────────────────── */
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: .58rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 20px;
+  border: 1px solid;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all .15s;
+}
+.status .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.status.pendiente   { background: rgba(122,113,104,.08); color: var(--muted);  border-color: rgba(122,113,104,.25); }
+.status.pendiente .dot { background: var(--muted); }
+.status.contactado  { background: var(--blue-bg);  color: var(--blue);  border-color: var(--blue-bd); }
+.status.contactado .dot { background: var(--blue); }
+.status.negociando  { background: var(--amber-bg); color: var(--amber); border-color: var(--amber-bd); }
+.status.negociando .dot { background: var(--amber); }
+.status.activo      { background: var(--green-bg); color: var(--green); border-color: var(--green-bd); }
+.status.activo .dot { background: var(--green); }
+.status.descartado  { background: var(--red-bg);   color: var(--red);   border-color: var(--red-bd); }
+.status.descartado .dot { background: var(--red); }
+
+/* ── CAT PILL ────────────────────────────────────────── */
+.cat { font-size: .54rem; font-weight: 600; padding: 2px 7px; border-radius: 20px; border: 1px solid; white-space: nowrap; }
+.cat.hacienda   { background: var(--gold-bg);  color: var(--gold);  border-color: var(--gold-bd); }
+.cat.escuela    { background: var(--blue-bg);  color: var(--blue);  border-color: var(--blue-bd); }
+.cat.universidad{ background: var(--green-bg); color: var(--green); border-color: var(--green-bd); }
+
+/* ── PRIORITY BADGE ──────────────────────────────────── */
+.prio { display: inline-flex; align-items: center; gap: 3px; font-size: .56rem; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
+.prio.alta    { color: var(--red); }
+.prio.alianza { color: var(--gold); }
+.prio.media   { color: var(--amber); }
+
+/* ── TASK CARD ───────────────────────────────────────── */
+.task {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-left: 3px solid;
+  border-radius: 0 8px 8px 0;
+  padding: 11px 14px;
+  margin-bottom: 7px;
+  display: grid;
+  grid-template-columns: 22px 1fr auto auto auto;
+  align-items: center;
+  gap: 10px;
+  transition: box-shadow .15s;
+}
+.task:hover { box-shadow: 0 2px 10px rgba(0,0,0,.06); }
+.task.done { opacity: .55; }
+.task.done .task-title { text-decoration: line-through; color: var(--muted); }
+.task.urgente  { border-left-color: var(--red); }
+.task.alta     { border-left-color: var(--amber); }
+.task.normal   { border-left-color: var(--blue); }
+.task-cb {
+  width: 18px; height: 18px;
+  border: 2px solid var(--rule);
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .7rem;
+  flex-shrink: 0;
+  transition: all .15s;
+  background: var(--paper);
+}
+.task-cb:hover { border-color: var(--gold); }
+.task-cb.checked { background: var(--green); border-color: var(--green); color: #fff; }
+.task-title  { font-size: .73rem; font-weight: 500; color: var(--ink); }
+.task-venue  { font-size: .62rem; color: var(--muted); margin-top: 2px; }
+.task-owner  { font-size: .6rem; background: var(--paper2); padding: 2px 7px; border-radius: 20px; color: var(--ink2); font-weight: 600; white-space: nowrap; }
+.task-due    { font-family: "JetBrains Mono", monospace; font-size: .6rem; white-space: nowrap; }
+.task-due.overdue { color: var(--red); font-weight: 600; }
+.task-due.soon    { color: var(--amber); font-weight: 600; }
+.task-due.ok      { color: var(--muted); }
+.task-del { background: none; border: none; color: var(--soft); cursor: pointer; font-size: .8rem; padding: 0 2px; opacity: 0; transition: opacity .15s; }
+.task:hover .task-del { opacity: 1; }
+.task-del:hover { color: var(--red); }
+
+/* ── ADD TASK FORM ───────────────────────────────────── */
+.add-form {
+  background: var(--paper2);
+  border: 1px dashed var(--rule);
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr auto;
+  gap: 8px;
+  align-items: end;
+}
+.add-form label { font-size: .58rem; text-transform: uppercase; letter-spacing: .7px; color: var(--muted); display: block; margin-bottom: 4px; }
+.add-input, .add-select {
+  width: 100%;
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 7px 10px;
+  font-size: .72rem;
+  color: var(--ink);
+  font-family: "DM Sans", sans-serif;
+  outline: none;
+  transition: border-color .15s;
+}
+.add-input:focus, .add-select:focus { border-color: var(--gold-bd); }
+.add-btn {
+  background: var(--gold);
+  color: var(--ink);
+  border: none;
+  border-radius: 6px;
+  padding: 8px 18px;
+  font-size: .72rem;
+  font-weight: 700;
+  font-family: "DM Sans", sans-serif;
+  cursor: pointer;
+  transition: background .15s;
+  white-space: nowrap;
+}
+.add-btn:hover { background: var(--gold-l); }
+
+/* ── REVENUE TRACKER ─────────────────────────────────── */
+.rev-table { width: 100%; border-collapse: collapse; font-size: .7rem; }
+.rev-table th {
+  font-size: .58rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .7px;
+  color: var(--muted);
+  padding: 6px 10px;
+  text-align: left;
+  border-bottom: 2px solid var(--rule);
+}
+.rev-table th.r { text-align: right; }
+.rev-table td { padding: 8px 10px; border-bottom: 1px solid var(--paper2); vertical-align: middle; }
+.rev-table tr:hover td { background: var(--paper); }
+.rev-table td.mono { font-family: "JetBrains Mono", monospace; font-size: .67rem; }
+.rev-table td.r { text-align: right; font-family: "JetBrains Mono", monospace; font-size: .67rem; }
+.rev-input {
+  background: none;
+  border: none;
+  border-bottom: 1px dashed var(--rule);
+  font-family: "JetBrains Mono", monospace;
+  font-size: .67rem;
+  color: var(--ink2);
+  width: 80px;
+  text-align: right;
+  outline: none;
+  padding: 2px 4px;
+  transition: border-color .15s;
+}
+.rev-input:focus { border-bottom-color: var(--gold); }
+.bar-wrap { height: 6px; background: var(--paper2); border-radius: 3px; overflow: hidden; min-width: 60px; }
+.bar-fill { height: 100%; border-radius: 3px; transition: width .4s; }
+.bar-fill.gold  { background: linear-gradient(90deg, var(--gold), var(--gold-l)); }
+.bar-fill.green { background: var(--green); }
+.bar-fill.gray  { background: var(--soft); }
+
+/* ── REVIEW CARD ─────────────────────────────────────── */
+.rev-card {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.rev-card-hd {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--paper2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.rev-card-title {
+  font-family: "DM Serif Display", serif;
+  font-size: .95rem;
+  color: var(--ink);
+}
+.rev-card-body { padding: 14px 18px; }
+
+/* ── FILTER ROW ──────────────────────────────────────── */
+.filter-row {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.f-btn {
+  font-size: .65rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--rule);
+  background: #fff;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all .15s;
+}
+.f-btn.act { background: var(--gold-bg); color: var(--gold); border-color: var(--gold-bd); }
+.search-box {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: .68rem;
+  color: var(--ink);
+  font-family: "DM Sans", sans-serif;
+  outline: none;
+  width: 200px;
+}
+.search-box:focus { border-color: var(--gold-bd); }
+.count-lbl { font-size: .62rem; color: var(--muted); margin-left: auto; }
+
+/* ── TOAST ───────────────────────────────────────────── */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--ink);
+  color: var(--gold-ll);
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: .72rem;
+  font-weight: 500;
+  border-left: 3px solid var(--gold);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all .25s;
+  pointer-events: none;
+  z-index: 999;
+}
+.toast.show { opacity: 1; transform: translateY(0); }
+
+/* ── SEMAFORO ────────────────────────────────────────── */
+.sema { display: inline-block; width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.sema.verde   { background: var(--green); box-shadow: 0 0 6px var(--green); }
+.sema.amarillo{ background: var(--amber); box-shadow: 0 0 6px var(--amber); }
+.sema.rojo    { background: var(--red);   box-shadow: 0 0 6px var(--red); }
+
+/* ── PROGRESS ────────────────────────────────────────── */
+.progress-ring { text-align: center; padding: 20px 10px; }
+.ring-val { font-family: "DM Serif Display", serif; font-size: 2.8rem; color: var(--gold); line-height: 1; }
+.ring-lbl { font-size: .62rem; color: var(--muted); text-transform: uppercase; letter-spacing: .7px; margin-top: 4px; }
+
+/* ── RESPONSIVE ──────────────────────────────────────── */
+@media(max-width:1100px) { .g4,.g5{grid-template-columns:1fr 1fr} .g3{grid-template-columns:1fr 1fr} }
+@media(max-width:750px)  { .g2,.g3,.g4,.g5{grid-template-columns:1fr} .add-form{grid-template-columns:1fr 1fr} }
+
+/* ── MODAL AGREGAR ALIANZA ───────────────────────── */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;display:flex;align-items:center;justify-content:center}
+.modal-bg.hidden{display:none}
+.modal{background:var(--paper);border:1px solid var(--rule);border-radius:14px;width:520px;max-width:94vw;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.modal-hd{background:var(--ink);padding:16px 22px;display:flex;align-items:center;justify-content:space-between}
+.modal-hd-title{font-family:"DM Serif Display",serif;font-size:1.1rem;color:var(--gold-ll)}
+.modal-close{background:none;border:none;color:rgba(255,255,255,.5);font-size:1.3rem;cursor:pointer;line-height:1;padding:2px 6px;border-radius:4px}
+.modal-close:hover{color:#fff;background:rgba(255,255,255,.1)}
+.modal-body{padding:22px 22px 18px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.modal-body .full{grid-column:span 2}
+.mf-label{font-size:.6rem;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);margin-bottom:4px;font-weight:600}
+.mf-input,.mf-select{width:100%;background:#fff;border:1px solid var(--rule);border-radius:7px;padding:8px 11px;font-size:.75rem;color:var(--ink);font-family:"DM Sans",sans-serif;outline:none;transition:border-color .15s}
+.mf-input:focus,.mf-select:focus{border-color:var(--gold-bd)}
+.modal-foot{padding:14px 22px 18px;display:flex;gap:10px;justify-content:flex-end;border-top:1px solid var(--rule);background:var(--paper2)}
+.btn-cancel{background:none;border:1px solid var(--rule);border-radius:7px;padding:8px 18px;font-size:.72rem;font-weight:600;color:var(--muted);cursor:pointer}
+.btn-cancel:hover{background:var(--paper3)}
+.btn-save{background:var(--gold);border:none;border-radius:7px;padding:8px 20px;font-size:.72rem;font-weight:700;color:var(--ink);cursor:pointer;font-family:"DM Sans",sans-serif}
+.btn-save:hover{background:var(--gold-l)}
+.custom-tag{display:inline-flex;align-items:center;gap:3px;background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-bd);border-radius:20px;font-size:.55rem;padding:1px 6px;font-weight:700}
+
+/* ── METAS IH / AYB separadas ────────────────────── */
+.meta2-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
+.meta2-card{background:#fff;border:1px solid var(--rule);border-radius:12px;overflow:hidden}
+.meta2-top{padding:14px 16px 12px;border-bottom:1px solid var(--rule)}
+.meta2-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.meta2-title{font-family:"DM Serif Display",serif;font-size:1rem}
+.meta2-input-row{display:flex;align-items:center;gap:8px}
+.meta2-input-lbl{font-size:.6rem;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);white-space:nowrap}
+.meta2-input{font-family:"JetBrains Mono",monospace;font-size:.78rem;font-weight:600;background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:5px 9px;width:140px;text-align:right;outline:none;color:var(--ink);transition:border-color .15s}
+.meta2-input:focus{border-color:var(--gold-bd)}
+.meta2-numbers{display:flex;gap:18px;margin-bottom:10px}
+.meta2-big{font-family:"DM Serif Display",serif;font-size:2rem;line-height:1}
+.meta2-big.blue{color:var(--blue)}.meta2-big.green{color:var(--green)}
+.meta2-of{font-size:.65rem;color:var(--muted);margin-top:3px}
+.meta2-track{height:10px;background:var(--paper2);border-radius:5px;overflow:hidden;margin-bottom:5px}
+.meta2-fill{height:100%;border-radius:5px;transition:width .5s}
+.meta2-fill.blue{background:var(--blue)}.meta2-fill.green{background:var(--green)}
+.meta2-pct-row{display:flex;justify-content:space-between;font-size:.63rem}
+.meta2-pct{font-weight:700}.meta2-pct.blue{color:var(--blue)}.meta2-pct.green{color:var(--green)}
+.meta2-rest{color:var(--muted)}
+.meta2-body{padding:12px 16px}
+.meta2-stat-row{display:flex;justify-content:space-between;font-size:.65rem;margin-bottom:5px}
+.meta2-stat-lbl{color:var(--muted)}.meta2-stat-val{font-family:"JetBrains Mono",monospace;font-weight:600}
+
+/* ── RESPONSIVE ESCRITORIO (sin cambios) ─────────────── */
+@media(max-width:1100px) { .g4,.g5{grid-template-columns:1fr 1fr} .g3{grid-template-columns:1fr 1fr} }
+@media(max-width:750px)  { .g2,.g3,.g4,.g5{grid-template-columns:1fr} .add-form{grid-template-columns:1fr 1fr} }
+
+/* ── RESPONSIVE MÓVIL ────────────────────────────────── */
+@media(max-width:480px) {
+  /* Header compacto */
+  header { padding: 0 12px; flex-wrap: wrap; }
+  .hdr-brand { padding: 10px 0; border-right: none; width: 100%; }
+  .hdr-title { font-size: 1.1rem; }
+  .hdr-meta { padding: 0 0 10px; gap: 10px; flex-wrap: wrap; overflow-x: auto; }
+  .hdr-stat-val { font-size: 1.1rem; }
+  .hdr-week { font-size: .6rem; padding: 6px 10px; }
+
+  /* Nav con scroll horizontal */
+  nav { padding: 0 8px; }
+  .nav-btn { padding: 10px 12px; font-size: .62rem; }
+
+  /* Main con menos padding */
+  main { padding: 14px 12px 60px; }
+
+  /* Grids a una columna */
+  .g2,.g3,.g4,.g5,.meta2-grid { grid-template-columns: 1fr !important; }
+
+  /* Formulario tareas en 1 columna */
+  .add-form { grid-template-columns: 1fr !important; }
+
+  /* Pipeline: cards a ancho completo */
+  #pipeline-grid { grid-template-columns: 1fr !important; }
+
+  /* Revenue: tabla con scroll horizontal */
+  .rev-card-body { overflow-x: auto; }
+  .rev-table { min-width: 600px; }
+
+  /* Tasks: ajuste de columnas */
+  .task { grid-template-columns: 22px 1fr auto; }
+  .task-owner, .task-due { display: none; }
+
+  /* Modal a pantalla completa */
+  .modal { width: 96vw; }
+  .modal-body { grid-template-columns: 1fr !important; }
+  .modal-body .full { grid-column: span 1 !important; }
+
+  /* Login box más angosto */
+  #login-screen > div { width: 92vw; padding: 28px 20px; }
+
+  /* KPI más compactos */
+  .kpi-val { font-size: 1.6rem; }
+  .kpi { padding: 12px 14px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ LOGIN SCREEN ══════════════════════════════════ -->
+<div id="login-screen" style="display:flex;min-height:100vh;align-items:center;justify-content:center;background:#1A1612;">
+  <div style="background:#F7F4EE;border-radius:16px;padding:40px 36px;width:360px;box-shadow:0 20px 60px rgba(0,0,0,.4)">
+    <div style="font-family:'DM Serif Display',serif;font-size:1.5rem;color:#B8973A;text-align:center;margin-bottom:4px">Alianzas GFA Sumiya</div>
+    <div style="font-size:.68rem;color:#7A7168;text-align:center;margin-bottom:28px">CRM de Seguimiento · Bodas &amp; Eventos</div>
+
+    <!-- Formulario Login -->
+    <div id="form-login">
+      <div style="font-size:.6rem;text-transform:uppercase;letter-spacing:.7px;color:#7A7168;font-weight:600;margin-bottom:5px">Correo electrónico</div>
+      <input id="li-email" type="email" placeholder="tu@correo.com" autocomplete="email"
+        style="width:100%;background:#fff;border:1px solid #D5CFC4;border-radius:8px;padding:10px 13px;font-size:.8rem;color:#1A1612;font-family:'DM Sans',sans-serif;outline:none;margin-bottom:14px">
+      <div style="font-size:.6rem;text-transform:uppercase;letter-spacing:.7px;color:#7A7168;font-weight:600;margin-bottom:5px">Contraseña</div>
+      <input id="li-pass" type="password" placeholder="••••••••" autocomplete="current-password"
+        style="width:100%;background:#fff;border:1px solid #D5CFC4;border-radius:8px;padding:10px 13px;font-size:.8rem;color:#1A1612;font-family:'DM Sans',sans-serif;outline:none;margin-bottom:14px">
+      <button id="li-btn" onclick="doLogin()"
+        style="width:100%;background:#B8973A;color:#1A1612;border:none;border-radius:8px;padding:12px;font-size:.8rem;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer">
+        Iniciar sesión
+      </button>
+      <div id="li-err" style="font-size:.68rem;color:#B53B3B;margin-top:10px;text-align:center;min-height:20px"></div>
+      <div onclick="toggleForm('registro')" style="font-size:.68rem;color:#2B5FA8;text-align:center;margin-top:14px;cursor:pointer;text-decoration:underline">¿Primera vez? Crear cuenta</div>
+    </div>
+
+    <!-- Formulario Registro -->
+    <div id="form-registro" style="display:none">
+      <div style="font-size:.6rem;text-transform:uppercase;letter-spacing:.7px;color:#7A7168;font-weight:600;margin-bottom:5px">Correo electrónico</div>
+      <input id="reg-email" type="email" placeholder="tu@correo.com"
+        style="width:100%;background:#fff;border:1px solid #D5CFC4;border-radius:8px;padding:10px 13px;font-size:.8rem;color:#1A1612;font-family:'DM Sans',sans-serif;outline:none;margin-bottom:14px">
+      <div style="font-size:.6rem;text-transform:uppercase;letter-spacing:.7px;color:#7A7168;font-weight:600;margin-bottom:5px">Contraseña (mín. 6 caracteres)</div>
+      <input id="reg-pass" type="password" placeholder="••••••••"
+        style="width:100%;background:#fff;border:1px solid #D5CFC4;border-radius:8px;padding:10px 13px;font-size:.8rem;color:#1A1612;font-family:'DM Sans',sans-serif;outline:none;margin-bottom:14px">
+      <button id="reg-btn" onclick="doRegistro()"
+        style="width:100%;background:#B8973A;color:#1A1612;border:none;border-radius:8px;padding:12px;font-size:.8rem;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer">
+        Crear cuenta
+      </button>
+      <div id="reg-err" style="font-size:.68rem;color:#B53B3B;margin-top:10px;text-align:center;min-height:20px"></div>
+      <div onclick="toggleForm('login')" style="font-size:.68rem;color:#2B5FA8;text-align:center;margin-top:14px;cursor:pointer;text-decoration:underline">¿Ya tienes cuenta? Iniciar sesión</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ APP ══════════════════════════════════════════ -->
+<div id="app-screen" style="display:none">
+
+<!-- ══ HEADER ═══════════════════════════════════════════ -->
+<header>
+  <div class="hdr-brand">
+    <div class="hdr-title">Alianzas GFA Sumiya</div>
+    <div class="hdr-sub">CRM de Seguimiento · Bodas &amp; Eventos Sociales</div>
+  </div>
+  <div class="hdr-meta">
+    <div class="hdr-divider"></div>
+    <div class="hdr-stat">
+      <div class="hdr-stat-val" id="hstat-total">0</div>
+      <div class="hdr-stat-lbl">Venues</div>
+    </div>
+    <div class="hdr-divider"></div>
+    <div class="hdr-stat">
+      <div class="hdr-stat-val" id="hstat-activas">0</div>
+      <div class="hdr-stat-lbl">Alianzas Activas</div>
+    </div>
+    <div class="hdr-divider"></div>
+    <div class="hdr-stat">
+      <div class="hdr-stat-val" id="hstat-noches">0</div>
+      <div class="hdr-stat-lbl">Noches Generadas</div>
+    </div>
+    <div class="hdr-divider"></div>
+    <div class="hdr-stat">
+      <div class="hdr-stat-val" id="hstat-rev">$0</div>
+      <div class="hdr-stat-lbl">Revenue MXN</div>
+    </div>
+    <div class="hdr-divider"></div>
+    <div class="hdr-stat">
+      <div class="hdr-stat-val" id="hstat-tasks">0</div>
+      <div class="hdr-stat-lbl">Tareas Vencidas</div>
+    </div>
+    <div class="hdr-week" id="hdr-week">Semana — cargando…</div>
+    <div style="display:flex;align-items:center;gap:6px;margin-left:8px">
+      <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#2E7D52;animation:pulse 2s infinite"></span>
+      <span style="font-size:.6rem;color:rgba(255,255,255,.4)">En vivo</span>
+    </div>
+    <div onclick="doLogout()" title="Cerrar sesión"
+      style="display:flex;align-items:center;gap:6px;padding:8px 14px;background:rgba(255,255,255,.06);border-radius:8px;font-size:.68rem;color:rgba(255,255,255,.6);cursor:pointer;border:1px solid rgba(255,255,255,.1);white-space:nowrap;margin-left:8px">
+      <span style="width:8px;height:8px;border-radius:50%;background:#2E7D52;flex-shrink:0;display:inline-block"></span>
+      <span id="hdr-username">—</span>
+      <span style="opacity:.5">· Salir</span>
+    </div>
+  </div>
+</header>
+
+<!-- ══ NAV ══════════════════════════════════════════════ -->
+<nav>
+  <button class="nav-btn act" onclick="showPage('dashboard',this)">📊 Dashboard</button>
+  <button class="nav-btn" onclick="showPage('pipeline',this)">🔄 Pipeline <span class="nav-badge" id="nb-pendiente">0</span></button>
+  <button class="nav-btn" onclick="showPage('tareas',this)">✅ Tareas <span class="nav-badge" id="nb-tasks">0</span></button>
+  <button class="nav-btn" onclick="showPage('revenue',this)">💰 Revenue</button>
+  <button class="nav-btn" onclick="showPage('revision',this)">📋 Revisión Semanal</button>
+  <button class="nav-btn" onclick="openModal()" style="margin-left:auto;background:var(--gold);color:var(--ink);font-weight:700;border-radius:6px;margin:6px 0 6px 12px;padding:6px 14px">+ Nueva alianza</button>
+</nav>
+
+<main>
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE 1 — DASHBOARD
+══════════════════════════════════════════════════════ -->
+<div class="page act" id="page-dashboard">
+  <div class="sec-title" style="margin-bottom:4px">Resumen General</div>
+  <div class="sec-sub">Estado actual del plan de alianzas · actualización en tiempo real</div>
+
+  <!-- KPI Strip -->
+  <div class="g5" id="kpi-strip">
+    <div class="kpi k-gold"><div class="kpi-lbl">Total Venues</div><div class="kpi-val gold" id="kpi-total">0</div><div class="kpi-sub">En seguimiento</div></div>
+    <div class="kpi k-green"><div class="kpi-lbl">Alianzas Activas</div><div class="kpi-val green" id="kpi-activas">0</div><div class="kpi-sub">Generando demanda</div></div>
+    <div class="kpi k-amber"><div class="kpi-lbl">En Negociación</div><div class="kpi-val amber" id="kpi-neg">0</div><div class="kpi-sub">Avanzando</div></div>
+    <div class="kpi k-blue"><div class="kpi-lbl">Contactados</div><div class="kpi-val blue" id="kpi-cont">0</div><div class="kpi-sub">Primer contacto hecho</div></div>
+    <div class="kpi k-red"><div class="kpi-lbl">Sin Contactar</div><div class="kpi-val red" id="kpi-pend">0</div><div class="kpi-sub">Acción requerida</div></div>
+  </div>
+
+  <div class="g2">
+    <!-- Pipeline visual -->
+    <div class="rev-card">
+      <div class="rev-card-hd">
+        <span class="rev-card-title">Embudo de Alianzas</span>
+        <span style="font-size:.62rem;color:var(--muted)">por categoría</span>
+      </div>
+      <div class="rev-card-body" id="funnel-body">
+        <div style="color:var(--muted);font-size:.7rem">Cargando…</div>
+      </div>
+    </div>
+
+    <!-- Tareas urgentes -->
+    <div class="rev-card">
+      <div class="rev-card-hd">
+        <span class="rev-card-title">⚡ Próximas Acciones</span>
+        <span style="font-size:.62rem;color:var(--muted)">Esta semana</span>
+      </div>
+      <div class="rev-card-body" id="dash-tasks">
+        <div style="color:var(--muted);font-size:.7rem">Sin tareas esta semana</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Revenue progress -->
+  <div class="rev-card" style="margin-bottom:14px">
+    <div class="rev-card-hd">
+      <span class="rev-card-title">💰 Revenue Generado por Alianzas</span>
+      <span id="rev-total-lbl" style="font-family:JetBrains Mono,monospace;font-size:.8rem;color:var(--gold);font-weight:600">$0 MXN</span>
+    </div>
+    <div class="rev-card-body" id="rev-bars-dash">
+      <div style="color:var(--muted);font-size:.7rem">Sin alianzas activas aún</div>
+    </div>
+  </div>
+
+  <!-- Semaforo de prioridades -->
+  <div class="rev-card">
+    <div class="rev-card-hd">
+      <span class="rev-card-title">🚦 Semáforo de Prioridades</span>
+      <span style="font-size:.62rem;color:var(--muted)">Venues que necesitan acción inmediata</span>
+    </div>
+    <div class="rev-card-body" id="semaforo-body">
+      <div style="color:var(--muted);font-size:.7rem">Cargando…</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE 2 — PIPELINE
+══════════════════════════════════════════════════════ -->
+<div class="page" id="page-pipeline">
+  <div class="sec-title">Pipeline de Contactos</div>
+  <div class="sec-sub">Haz clic en el estado para cambiarlo · Agrega notas de cada contacto · Se guarda automáticamente</div>
+
+  <div class="filter-row">
+    <button class="f-btn act" onclick="filterPipe(this,'ALL')">Todos</button>
+    <button class="f-btn" onclick="filterPipe(this,'pendiente')">⚪ Pendiente</button>
+    <button class="f-btn" onclick="filterPipe(this,'contactado')">🔵 Contactado</button>
+    <button class="f-btn" onclick="filterPipe(this,'negociando')">🟡 Negociando</button>
+    <button class="f-btn" onclick="filterPipe(this,'activo')">🟢 Activo</button>
+    <button class="f-btn" onclick="filterPipe(this,'descartado')">🔴 Descartado</button>
+    <span class="count-lbl" id="pipe-count">0 venues</span>
+  </div>
+
+  <div class="g3" id="pipeline-grid">
+    <div style="color:var(--muted);font-size:.7rem">Cargando…</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE 3 — TAREAS
+══════════════════════════════════════════════════════ -->
+<div class="page" id="page-tareas">
+  <div class="sec-title">Tareas &amp; Seguimiento</div>
+  <div class="sec-sub">Asigna tareas al equipo de ventas · Fecha límite · Prioridad · Se guarda automáticamente</div>
+
+  <!-- Add task form -->
+  <div class="add-form">
+    <div>
+      <label>Tarea</label>
+      <input class="add-input" id="t-title" placeholder="Ej: Llamar a coordinadora de bodas…" type="text">
+    </div>
+    <div>
+      <label>Venue relacionado</label>
+      <select class="add-select" id="t-venue"></select>
+    </div>
+    <div>
+      <label>Responsable</label>
+      <input class="add-input" id="t-owner" placeholder="Nombre del responsable" type="text">
+    </div>
+    <div>
+      <label>Fecha límite</label>
+      <input class="add-input" id="t-due" type="date">
+    </div>
+    <div>
+      <label>Prioridad</label>
+      <select class="add-select" id="t-prio">
+        <option value="urgente">🔴 Urgente</option>
+        <option value="alta" selected>🟡 Alta</option>
+        <option value="normal">🔵 Normal</option>
+      </select>
+    </div>
+    <button class="add-btn" onclick="addTask()" style="grid-column:span 1;margin-top:22px">+ Agregar</button>
+  </div>
+
+  <div class="filter-row">
+    <button class="f-btn act" onclick="filterTasks(this,'ALL')">Todas</button>
+    <button class="f-btn" onclick="filterTasks(this,'urgente')">🔴 Urgente</button>
+    <button class="f-btn" onclick="filterTasks(this,'alta')">🟡 Alta</button>
+    <button class="f-btn" onclick="filterTasks(this,'normal')">🔵 Normal</button>
+    <button class="f-btn" onclick="filterTasks(this,'done')">✅ Completadas</button>
+    <span class="count-lbl" id="task-count">0 tareas</span>
+  </div>
+
+  <div id="tasks-list">
+    <div style="color:var(--muted);font-size:.7rem;padding:20px 0">Sin tareas aún. Agrega la primera arriba.</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE 4 — REVENUE
+══════════════════════════════════════════════════════ -->
+<div class="page" id="page-revenue">
+  <div class="sec-title">Revenue por Alianza</div>
+  <div class="sec-sub">CN = Cuartos Noche · TP = Tarifa Promedio · IH = CN × TP (automático) · Ing A&amp;B editable · Revenue Total = IH + A&amp;B</div>
+
+  <!-- KPI strip -->
+  <div class="g4" style="margin-bottom:16px">
+    <div class="kpi k-blue"><div class="kpi-lbl">IH total</div><div class="kpi-val blue" id="rev-ih-kpi">$0</div><div class="kpi-sub">Ingreso Habitaciones</div></div>
+    <div class="kpi k-green"><div class="kpi-lbl">A&amp;B total</div><div class="kpi-val green" id="rev-ayb-kpi">$0</div><div class="kpi-sub">Ingresos A&amp;B</div></div>
+    <div class="kpi k-gold"><div class="kpi-lbl">Revenue total</div><div class="kpi-val gold" id="rev-mxn">$0</div><div class="kpi-sub">IH + A&amp;B acumulado</div></div>
+    <div class="kpi k-amber"><div class="kpi-lbl">CN total</div><div class="kpi-val amber" id="rev-noches">0</div><div class="kpi-sub">Cuartos noche confirmados</div></div>
+  </div>
+
+  <!-- METAS SEPARADAS -->
+  <div class="meta2-grid">
+
+    <!-- META IH -->
+    <div class="meta2-card">
+      <div class="meta2-top">
+        <div class="meta2-hd">
+          <span class="meta2-title">🛏 Meta Ingreso Habitaciones</span>
+          <div class="meta2-input-row">
+            <span class="meta2-input-lbl">Meta anual $</span>
+            <input class="meta2-input" id="goal-ih" type="number" value="15000000" oninput="renderRevenue()">
+          </div>
+        </div>
+        <div class="meta2-numbers">
+          <div>
+            <div class="meta2-big blue" id="meta-ih-ach">$0</div>
+            <div class="meta2-of">alcanzado</div>
+          </div>
+          <div>
+            <div class="meta2-big" style="color:var(--muted)" id="meta-ih-rest">—</div>
+            <div class="meta2-of">faltante</div>
+          </div>
+        </div>
+        <div class="meta2-track"><div class="meta2-fill blue" id="meta-ih-bar" style="width:0%"></div></div>
+        <div class="meta2-pct-row">
+          <span class="meta2-pct blue" id="meta-ih-pct">0%</span>
+          <span class="meta2-rest" id="meta-ih-of">de $15,000,000</span>
+        </div>
+      </div>
+      <div class="meta2-body">
+        <div class="meta2-stat-row"><span class="meta2-stat-lbl">Venues activos aportando IH</span><span class="meta2-stat-val" id="meta-ih-activos">0</span></div>
+        <div class="meta2-stat-row"><span class="meta2-stat-lbl">CN total confirmados</span><span class="meta2-stat-val" id="meta-ih-cn">0</span></div>
+        <div class="meta2-stat-row"><span class="meta2-stat-lbl">TP promedio ponderado</span><span class="meta2-stat-val" id="meta-ih-tp">—</span></div>
+        <div class="meta2-stat-row"><span class="meta2-stat-lbl">IH promedio por venue activo</span><span class="meta2-stat-val" id="meta-ih-avg">—</span></div>
+      </div>
+    </div>
+
+    <!-- META A&B -->
+    <div class="meta2-card">
+      <div class="meta2-top">
+        <div class="meta2-hd">
+          <span class="meta2-title">🍽 Meta Ingresos A&amp;B</span>
+          <div class="meta2-input-row">
+            <span class="meta2-input-lbl">Meta anual $</span>
+            <input class="meta2-input" id="goal-ayb" type="number" value="5000000" oninput="renderRevenue()">
+          </div>
+        </div>
+        <div class="meta2-numbers">
+          <div>
+            <div class="meta2-big green" id="meta-ayb-ach">$0</div>
+            <div class="meta2-of">alcanzado</div>
+          </div>
+          <div>
+            <div class="meta2-big" style="color:var(--muted)" id="meta-ayb-rest">—</div>
+            <div class="meta2-of">faltante</div>
+          </div>
+        </div>
+        <div class="meta2-track"><div class="meta2-fill green" id="meta-ayb-bar" style="width:0%"></div></div>
+        <div class="meta2-pct-row">
+          <span class="meta2-pct green" id="meta-ayb-pct">0%</span>
+          <span class="meta2-rest" id="meta-ayb-of">de $5,000,000</span>
+        </div>
+      </div>
+      <div class="meta2-body">
+        <div class="meta2-stat-row"><span class="meta2-stat-lbl">Venues activos aportando A&amp;B</span><span class="meta2-stat-val" id="meta-ayb-activos">0</span></div>
+        <div class="meta2-stat-row"><span class="meta2-stat-lbl">A&amp;B promedio por venue</span><span class="meta2-stat-val" id="meta-ayb-avg">—</span></div>
+        <div class="meta2-stat-row"><span class="meta2-stat-lbl">Ratio A&amp;B / IH</span><span class="meta2-stat-val" id="meta-ayb-ratio">—</span></div>
+        <div class="meta2-stat-row"><span class="meta2-stat-lbl">Revenue total (IH + A&amp;B)</span><span class="meta2-stat-val" id="meta-ayb-total" style="color:var(--gold)">$0</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABLA -->
+  <div class="rev-card">
+    <div class="rev-card-hd" style="flex-wrap:wrap;gap:8px">
+      <span class="rev-card-title">Registro por Venue</span>
+      <span style="font-size:.62rem;color:var(--muted)">Editable cuando estado = Activo o Negociando · IH y Rev. Total se calculan automáticamente</span>
+    </div>
+    <div class="rev-card-body" style="padding:0;overflow-x:auto">
+      <table class="rev-table">
+        <thead><tr>
+          <th>Venue</th>
+          <th>Estado</th>
+          <th class="r">CN<br><span style="font-weight:400;font-size:.5rem;letter-spacing:0;text-transform:none">Cuartos Noche</span></th>
+          <th class="r">TP<br><span style="font-weight:400;font-size:.5rem;letter-spacing:0;text-transform:none">Tarifa Promedio</span></th>
+          <th class="r">IH<br><span style="font-weight:400;font-size:.5rem;letter-spacing:0;text-transform:none">CN × TP</span></th>
+          <th class="r">Ing A&amp;B<br><span style="font-weight:400;font-size:.5rem;letter-spacing:0;text-transform:none">editable</span></th>
+          <th class="r">Rev. Total<br><span style="font-weight:400;font-size:.5rem;letter-spacing:0;text-transform:none">IH + A&amp;B</span></th>
+          <th>Avance IH<br><span style="font-weight:400;font-size:.5rem;letter-spacing:0;text-transform:none">vs meta venue</span></th>
+        </tr></thead>
+        <tbody id="rev-tbody"></tbody>
+        <tfoot>
+          <tr style="background:var(--ink)">
+            <td colspan="2" style="color:#fff;font-weight:700;font-size:.72rem;padding:10px">TOTAL GENERAL</td>
+            <td class="r" id="rev-tot-cn" style="color:var(--gold-ll);font-family:JetBrains Mono,monospace;font-weight:700">0</td>
+            <td class="r" style="color:rgba(255,255,255,.4)">—</td>
+            <td class="r" id="rev-tot-ih" style="color:var(--gold-ll);font-family:JetBrains Mono,monospace;font-weight:700">$0</td>
+            <td class="r" id="rev-tot-ayb" style="color:var(--gold-ll);font-family:JetBrains Mono,monospace;font-weight:700">$0</td>
+            <td class="r" id="rev-tot-mxn" style="color:var(--gold-ll);font-family:JetBrains Mono,monospace;font-weight:700">$0</td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE 5 — REVISIÓN SEMANAL
+══════════════════════════════════════════════════════ -->
+<div class="page" id="page-revision">
+  <div class="sec-title">Revisión Semanal del Equipo</div>
+  <div class="sec-sub">Resumen generado automáticamente para la reunión semanal de ventas · imprimir o compartir</div>
+
+  <div class="g3" id="revision-cards">
+    <div style="color:var(--muted)">Generando resumen…</div>
+  </div>
+
+  <div class="sec-rule">Compromisos de la semana</div>
+  <div id="revision-compromisos"></div>
+
+  <div class="sec-rule">Venues sin contactar con alta prioridad</div>
+  <div id="revision-urgente"></div>
+
+  <div class="sec-rule">Actividad reciente — últimas notas guardadas</div>
+  <div id="revision-notas"></div>
+
+  <div style="margin-top:24px;display:flex;gap:10px">
+    <button class="add-btn" onclick="window.print()">🖨️ Imprimir resumen</button>
+    <button class="add-btn" style="background:var(--blue);color:#fff" onclick="copyRevision()">📋 Copiar para WhatsApp/correo</button>
+  </div>
+</div>
+
+
+<!-- ══ MODAL NUEVA ALIANZA ══════════════════════════ -->
+<div class="modal-bg hidden" id="modal-alianza">
+  <div class="modal">
+    <div class="modal-hd">
+      <span class="modal-hd-title">+ Nueva Alianza / Cliente</span>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="full">
+        <div class="mf-label">Nombre del venue o cliente *</div>
+        <input class="mf-input" id="m-nombre" placeholder="Ej: Hotel Boutique Las Mañanitas" type="text">
+      </div>
+      <div>
+        <div class="mf-label">Categoría</div>
+        <select class="mf-select" id="m-cat">
+          <option value="hacienda">🌿 Hacienda / Jardín</option>
+          <option value="escuela">🏫 Escuela</option>
+          <option value="universidad">🎓 Universidad</option>
+          <option value="planner">💍 Wedding Planner</option>
+          <option value="empresa">🏢 Empresa</option>
+          <option value="club">⛳ Club / Asociación</option>
+          <option value="iglesia">⛪ Iglesia / Templo</option>
+          <option value="otro">📌 Otro</option>
+        </select>
+      </div>
+      <div>
+        <div class="mf-label">Prioridad</div>
+        <select class="mf-select" id="m-prio">
+          <option value="alianza">⭐ Alianza estratégica</option>
+          <option value="alta">◆ Alta</option>
+          <option value="media" selected>· Media</option>
+        </select>
+      </div>
+      <div>
+        <div class="mf-label">Teléfono de contacto</div>
+        <input class="mf-input" id="m-tel" placeholder="777 000 0000" type="text">
+      </div>
+      <div>
+        <div class="mf-label">Distancia / Ubicación</div>
+        <input class="mf-input" id="m-km" placeholder="Ej: 15 min · Centro Cuernavaca" type="text">
+      </div>
+      <div>
+        <div class="mf-label">Meta noches/año</div>
+        <input class="mf-input" id="m-meta" placeholder="200" type="number" min="0">
+      </div>
+      <div>
+        <div class="mf-label">Email</div>
+        <input class="mf-input" id="m-email" placeholder="contacto@venue.com" type="text">
+      </div>
+      <div class="full">
+        <div class="mf-label">Acción / Nota inicial</div>
+        <input class="mf-input" id="m-accion" placeholder="Ej: Contactar al coordinador de bodas para propuesta de alianza" type="text">
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-cancel" onclick="closeModal()">Cancelar</button>
+      <button class="btn-save" onclick="saveCustomVenue()">Guardar alianza</button>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<div class="toast" id="toast"></div>
+
+</div><!-- /#app-screen -->
+
+<style>@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}</style>
+
+<script type="module">
+// ══ FIREBASE IMPORTS ══════════════════════════════════
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged }
+  from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
+import { getFirestore, doc, setDoc, onSnapshot }
+  from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCkNEb1lpwFNb24GSvK8XhxJe4DacPbJx4",
+  authDomain: "alianzas-158da.firebaseapp.com",
+  projectId: "alianzas-158da",
+  storageBucket: "alianzas-158da.firebasestorage.app",
+  messagingSenderId: "114089078096",
+  appId: "1:114089078096:web:9c8af55813fbbcdb665055"
+};
+const _app  = initializeApp(firebaseConfig);
+const _auth = getAuth(_app);
+const _db   = getFirestore(_app);
+let _unsubscribe = null;
+
+// ══════════════════════════════════════════════════════
+// DATA — 26 venues del plan de alianzas GFA Sumiya
+// ══════════════════════════════════════════════════════
+const VENUES_INIT = [
+  // HACIENDAS — meta noches/año
+  {id:"hcda-sgaspar",  n:"Hacienda San Gaspar",            cat:"hacienda",  prio:"alianza", tel:"+52 777 323 6041", km:"8 min",  metaNoches:1800, accion:"Visita urgente — queja de alojamiento en reseñas"},
+  {id:"hcda-chiconcuac",n:"Hacienda de Chiconcuac",        cat:"hacienda",  prio:"alianza", tel:"+52 800 711 2222", km:"20 min", metaNoches:2000, accion:"Hotel oficial — solo 6 hab. propias, 100% necesita externo"},
+  {id:"jard-mexico",   n:"Jardines de México",             cat:"hacienda",  prio:"alianza", tel:"—",                km:"45 min", metaNoches:3000, accion:"Acuerdo 'Hotel Oficial' + bloque 30 hab. + shuttle"},
+  {id:"hcda-imago",    n:"Hacienda Imago Apanquetzalco",   cat:"hacienda",  prio:"alta",    tel:"—",                km:"20 min", metaNoches:1200, accion:"Sin hab. propias — 100% demanda externa"},
+  {id:"hcda-cortes",   n:"Hacienda de Cortés (Hotel & Spa)",cat:"hacienda", prio:"alta",    tel:"+52 777 315 8844", km:"10 min", metaNoches:600,  accion:"Overflow bodas grandes — 51 hab. propias se saturan"},
+  {id:"hcda-sgabriel", n:"Hacienda San Gabriel Las Palmas",cat:"hacienda",  prio:"media",   tel:"+52 751 348 0088", km:"50 min", metaNoches:400,  accion:"Overflow destino CDMX — alianza de desbordamiento"},
+  {id:"hcda-vhermosa", n:"Hacienda San José Vista Hermosa",cat:"hacienda",  prio:"media",   tel:"+52 734 342 0190", km:"45 min", metaNoches:300,  accion:"Overflow habitaciones en bodas grandes"},
+  {id:"jard-allegra",  n:"Jardín Allegra 55",              cat:"hacienda",  prio:"media",   tel:"—",                km:"10 min", metaNoches:400,  accion:"Venue moderno Jiutepec — propuesta alianza"},
+  {id:"hcda-scecilia", n:"Ex Hacienda Santa Cecilia",      cat:"hacienda",  prio:"media",   tel:"—",                km:"10 min", metaNoches:300,  accion:"Venue en crecimiento en zona inmediata"},
+  {id:"jard-estancia", n:"Jardín La Estancia",             cat:"hacienda",  prio:"media",   tel:"—",                km:"15 min", metaNoches:250,  accion:"Clásico familiar — propuesta referidos"},
+  {id:"hcda-sanant",   n:"Hacienda San Antonio El Puente", cat:"hacienda",  prio:"media",   tel:"+52 777 362 0770", km:"20 min", metaNoches:0,    accion:"Monitorear — competencia Posadas"},
+  // ESCUELAS
+  {id:"esc-suizo",     n:"Colegio Suizo de México",        cat:"escuela",   prio:"alta",    tel:"(777) 323 5252",   km:"15 min", metaNoches:80,   accion:"Patrocinar evento padres · graduaciones NSE A+"},
+  {id:"esc-qe",        n:"Queen Elizabeth School (CEAM)",  cat:"escuela",   prio:"alta",    tel:"—",                km:"15 min", metaNoches:60,   accion:"Acreditación SAIS — cenas y graduaciones premium"},
+  {id:"esc-colon",     n:"Colegio Cristóbal Colón",        cat:"escuela",   prio:"media",   tel:"(777) 318 9170",   km:"18 min", metaNoches:40,   accion:"Graduaciones con alta asistencia familiar"},
+  // UNIVERSIDADES
+  {id:"uni-itesm",     n:"ITESM Campus Cuernavaca",        cat:"universidad",prio:"alta",   tel:"(777) 362 0800",   km:"15 min", metaNoches:200,  accion:"Convenio institucional bodas egresados · NSE A+"},
+  {id:"uni-lasalle",   n:"Universidad La Salle Cuernavaca",cat:"universidad",prio:"alta",   tel:"(777) 311 5525",   km:"18 min", metaNoches:150,  accion:"Bodas católicas egresados + graduaciones"},
+  {id:"uni-anahuac",   n:"Centro Univ. México y Anáhuac",  cat:"universidad",prio:"alta",   tel:"—",                km:"18 min", metaNoches:120,  accion:"Anáhuac NSE A+ — galas y graduaciones"},
+  {id:"uni-uvm",       n:"UVM Campus Cuernavaca",          cat:"universidad",prio:"media",  tel:"(777) 362 3939",   km:"15 min", metaNoches:100,  accion:"Alta matrícula — graduaciones y XV años"},
+  {id:"uni-uaem",      n:"UAEM — Univ. Autónoma",          cat:"universidad",prio:"media",  tel:"(777) 329 7002",   km:"20 min", metaNoches:60,   accion:"Graduaciones posgrado · convenio institucional"},
+  {id:"uni-latinoam",  n:"Universidad Latinoamericana",    cat:"universidad",prio:"media",  tel:"—",                km:"18 min", metaNoches:40,   accion:"Graduaciones y eventos campus"},
+  {id:"uni-upem",      n:"UPEM Campus Cuernavaca",         cat:"universidad",prio:"media",  tel:"—",                km:"20 min", metaNoches:40,   accion:"Convenio bodas egresados"},
+  {id:"uni-intl",      n:"Universidad Internacional",      cat:"universidad",prio:"media",  tel:"—",                km:"20 min", metaNoches:30,   accion:"Graduaciones y eventos sociales campus"},
+  {id:"uni-vallemorelos",n:"Univ. del Valle de Cuernavaca",cat:"universidad",prio:"media",  tel:"—",                km:"22 min", metaNoches:30,   accion:"Graduaciones y paquetes grupales"},
+  {id:"uni-unam",      n:"UNAM Campus Morelos",            cat:"universidad",prio:"media",  tel:"—",                km:"20 min", metaNoches:30,   accion:"Posgrados — eventos académicos de alto nivel"},
+  {id:"uni-cies",      n:"Univ. Marista / CIES",           cat:"universidad",prio:"media",  tel:"—",                km:"22 min", metaNoches:20,   accion:"Graduaciones institucionales"},
+  {id:"uni-cuam",      n:"Centro Universitario CUAM",      cat:"universidad",prio:"media",  tel:"—",                km:"20 min", metaNoches:20,   accion:"Perfil internacional · bodas y graduaciones"},
+];
+
+const STATUS_CYCLE = ["pendiente","contactado","negociando","activo","descartado"];
+const STATUS_LABELS = {pendiente:"Pendiente",contactado:"Contactado",negociando:"Negociando",activo:"Alianza Activa",descartado:"Descartado"};
+const STATUS_ICONS  = {pendiente:"⚪",contactado:"🔵",negociando:"🟡",activo:"🟢",descartado:"🔴"};
+const TASK_PRIO_LABEL = {urgente:"🔴 Urgente",alta:"🟡 Alta",normal:"🔵 Normal"};
+const TARIFA_BASE = 3000;
+
+// ══ STATE ════════════════════════════════════════════
+let STATE = {
+  venues: {},    // {id: {status, notes, lastContact, noches, tarifa}}
+  tasks:  [],    // [{id,title,venue,owner,due,prio,done,created}]
+};
+
+// ══ STORAGE (Firebase Firestore) ══════════════════════
+function initMissingVenues() {
+  VENUES_INIT.forEach(v => {
+    if (!STATE.venues[v.id])
+      STATE.venues[v.id] = {status:"pendiente", notes:"", lastContact:"", noches:0, tarifa:TARIFA_BASE, ayb:0};
+  });
+  if (!STATE.tasks) STATE.tasks = [];
+  if (!STATE.customVenues) STATE.customVenues = [];
+  (STATE.customVenues||[]).forEach(v => {
+    if (!STATE.venues[v.id]) STATE.venues[v.id] = {status:"pendiente",notes:"",lastContact:"",noches:0,tarifa:TARIFA_BASE,ayb:0};
+  });
+}
+
+function subscribeFirestore() {
+  const ref = doc(_db, "crm", "crm-state");
+  _unsubscribe = onSnapshot(ref, (snap) => {
+    if (snap.exists()) {
+      try { STATE = JSON.parse(snap.data().data); } catch(e) {}
+    }
+    initMissingVenues();
+    updateHeaderStats();
+    const active = document.querySelector(".page.act");
+    if (active) {
+      const pid = active.id.replace("page-","");
+      if(pid==="dashboard") renderDashboard();
+      if(pid==="pipeline")  renderPipeline();
+      if(pid==="tareas")    renderTasks();
+      if(pid==="revenue")   renderRevenue();
+      if(pid==="revision")  renderRevision();
+    }
+  });
+}
+
+async function saveState() {
+  try {
+    await setDoc(doc(_db, "crm", "crm-state"), {
+      data: JSON.stringify(STATE),
+      updatedAt: Date.now()
+    });
+    toast("Guardado ✓");
+  } catch(e) { console.error(e); toast("Error al guardar"); }
+}
+
+// ══ UTILS ════════════════════════════════════════════
+function fmt(n) {
+  if (n >= 1e6) return "$" + (n/1e6).toFixed(1) + "M";
+  if (n >= 1e3) return "$" + (n/1e3).toFixed(0) + "K";
+  return "$" + n;
+}
+function fmtFull(n) {
+  return "$" + n.toLocaleString("es-MX");
+}
+function dateStr(d) {
+  return new Date(d).toLocaleDateString("es-MX",{day:"2-digit",month:"short",year:"numeric"});
+}
+function daysUntil(dateStr) {
+  if (!dateStr) return 9999;
+  const d = new Date(dateStr); const now = new Date();
+  return Math.floor((d - now) / 86400000);
+}
+function todayISO() {
+  return new Date().toISOString().slice(0,10);
+}
+function weekLabel() {
+  const d = new Date();
+  const start = new Date(d); start.setDate(d.getDate() - d.getDay() + 1);
+  const end   = new Date(start); end.setDate(start.getDate() + 6);
+  const opts  = {day:"2-digit",month:"short"};
+  return `Semana ${start.toLocaleDateString("es-MX",opts)} – ${end.toLocaleDateString("es-MX",opts)}`;
+}
+let toastTimer;
+function toast(msg) {
+  const el = document.getElementById("toast");
+  el.textContent = msg; el.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove("show"), 2000);
+}
+
+// ══ PAGE NAV ═════════════════════════════════════════
+let PIPE_FILTER = "ALL", TASK_FILTER = "ALL";
+function showPage(id, btn) {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("act"));
+  document.querySelectorAll(".nav-btn").forEach(b => b.classList.remove("act"));
+  document.getElementById("page-"+id).classList.add("act");
+  btn.classList.add("act");
+  if (id === "dashboard") renderDashboard();
+  if (id === "pipeline")  renderPipeline();
+  if (id === "tareas")    renderTasks();
+  if (id === "revenue")   renderRevenue();
+  if (id === "revision")  renderRevision();
+}
+
+// ══ COMPUTED ═════════════════════════════════════════
+function allVenues() {
+  const custom = (STATE.customVenues||[]);
+  return [...VENUES_INIT, ...custom];
+}
+
+function getStats() {
+  let activas=0, neg=0, cont=0, pend=0, noches=0, rev=0;
+  allVenues().forEach(v => {
+    const s = STATE.venues[v.id]?.status || "pendiente";
+    if (s==="activo")     activas++;
+    else if (s==="negociando") neg++;
+    else if (s==="contactado") cont++;
+    else if (s==="pendiente")  pend++;
+    noches += parseInt(STATE.venues[v.id]?.noches||0);
+    const tarifa = parseInt(STATE.venues[v.id]?.tarifa||TARIFA_BASE);
+    const ayb = parseInt(STATE.venues[v.id]?.ayb||0);
+    rev += (parseInt(STATE.venues[v.id]?.noches||0)) * tarifa + ayb;
+  });
+  const tasksOverdue = STATE.tasks.filter(t => !t.done && daysUntil(t.due) < 0).length;
+  return {activas,neg,cont,pend,noches,rev,tasksOverdue,total:allVenues().length};
+}
+
+function updateHeaderStats() {
+  const s = getStats();
+  document.getElementById("hstat-total").textContent    = s.total;
+  document.getElementById("hstat-activas").textContent  = s.activas;
+  document.getElementById("hstat-noches").textContent   = s.noches;
+  document.getElementById("hstat-rev").textContent      = fmt(s.rev);
+  document.getElementById("hstat-tasks").textContent    = s.tasksOverdue;
+  document.getElementById("hdr-week").textContent       = weekLabel();
+  document.getElementById("nb-pendiente").textContent   = s.pend;
+  document.getElementById("nb-tasks").textContent       = STATE.tasks.filter(t=>!t.done&&daysUntil(t.due)<0).length;
+}
+
+// ══ DASHBOARD ════════════════════════════════════════
+function renderDashboard() {
+  const s = getStats();
+  document.getElementById("kpi-total").textContent   = s.total;
+  document.getElementById("kpi-activas").textContent = s.activas;
+  document.getElementById("kpi-neg").textContent     = s.neg;
+  document.getElementById("kpi-cont").textContent    = s.cont;
+  document.getElementById("kpi-pend").textContent    = s.pend;
+
+  // Funnel
+  const cats = ["hacienda","escuela","universidad"];
+  const catNames = {hacienda:"Haciendas/Jardines",escuela:"Escuelas",universidad:"Universidades"};
+  let funnelHtml = "";
+  cats.forEach(cat => {
+    const vv = allVenues().filter(v=>v.cat===cat);
+    const byStatus = {};
+    STATUS_CYCLE.forEach(s => byStatus[s] = 0);
+    vv.forEach(v => { byStatus[STATE.venues[v.id]?.status||"pendiente"]++; });
+    funnelHtml += `<div style="margin-bottom:14px">
+      <div style="font-size:.68rem;font-weight:600;color:var(--ink);margin-bottom:6px">${catNames[cat]} <span style="color:var(--muted);font-weight:400">(${vv.length})</span></div>
+      <div style="display:flex;gap:4px;flex-wrap:wrap">
+        ${STATUS_CYCLE.map(st => `
+          <div style="flex:${byStatus[st]||0.1};min-width:28px;background:${st==="activo"?"var(--green-bg)":st==="negociando"?"var(--amber-bg)":st==="contactado"?"var(--blue-bg)":st==="descartado"?"var(--red-bg)":"var(--paper2)"};border:1px solid ${st==="activo"?"var(--green-bd)":st==="negociando"?"var(--amber-bd)":st==="contactado"?"var(--blue-bd)":st==="descartado"?"var(--red-bd)":"var(--rule)"};border-radius:4px;padding:4px 6px;text-align:center">
+            <div style="font-family:JetBrains Mono,monospace;font-size:.8rem;font-weight:600;color:${st==="activo"?"var(--green)":st==="negociando"?"var(--amber)":st==="contactado"?"var(--blue)":st==="descartado"?"var(--red)":"var(--muted)"}">${byStatus[st]}</div>
+            <div style="font-size:.52rem;color:var(--muted)">${STATUS_ICONS[st]}</div>
+          </div>`).join("")}
+      </div>
+    </div>`;
+  });
+  document.getElementById("funnel-body").innerHTML = funnelHtml;
+
+  // Tareas urgentes
+  const urgentTasks = STATE.tasks
+    .filter(t => !t.done && daysUntil(t.due) <= 7)
+    .sort((a,b) => new Date(a.due)-new Date(b.due))
+    .slice(0,5);
+  if (urgentTasks.length) {
+    document.getElementById("dash-tasks").innerHTML = urgentTasks.map(t => {
+      const d = daysUntil(t.due);
+      const dcol = d<0?"var(--red)":d<=2?"var(--amber)":"var(--muted)";
+      return `<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--paper2)">
+        <div style="width:8px;height:8px;border-radius:50%;background:${t.prio==="urgente"?"var(--red)":t.prio==="alta"?"var(--amber)":"var(--blue)"};flex-shrink:0"></div>
+        <div style="flex:1">
+          <div style="font-size:.72rem;font-weight:500">${t.title}</div>
+          <div style="font-size:.6rem;color:var(--muted)">${t.venue} · ${t.owner}</div>
+        </div>
+        <div style="font-family:JetBrains Mono,monospace;font-size:.6rem;color:${dcol};white-space:nowrap">${d<0?"Vencida":d===0?"Hoy":d===1?"Mañana":"En "+d+" días"}</div>
+      </div>`;
+    }).join("");
+  } else {
+    document.getElementById("dash-tasks").innerHTML = `<div style="color:var(--green);font-size:.7rem;padding:8px 0">✅ Sin tareas urgentes esta semana</div>`;
+  }
+
+  // Revenue bars
+  const activeVenues = VENUES_INIT.filter(v => STATE.venues[v.id]?.status==="activo");
+  if (activeVenues.length) {
+    const maxNoches = Math.max(...activeVenues.map(v=>parseInt(STATE.venues[v.id]?.noches||0)));
+    let totalRev = 0;
+    document.getElementById("rev-bars-dash").innerHTML = activeVenues.map(v => {
+      const noches = parseInt(STATE.venues[v.id]?.noches||0);
+      const tarifa = parseInt(STATE.venues[v.id]?.tarifa||TARIFA_BASE);
+      const rev = noches * tarifa;
+      totalRev += rev;
+      const w = maxNoches>0 ? Math.round(noches/maxNoches*100) : 0;
+      return `<div style="display:grid;grid-template-columns:200px 1fr 100px;align-items:center;gap:10px;margin-bottom:8px">
+        <div style="font-size:.68rem;color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${v.n}">${v.n}</div>
+        <div class="bar-wrap"><div class="bar-fill gold" style="width:${w}%"></div></div>
+        <div style="font-family:JetBrains Mono,monospace;font-size:.67rem;color:var(--gold);text-align:right;font-weight:600">${fmtFull(rev)}</div>
+      </div>`;
+    }).join("");
+    document.getElementById("rev-total-lbl").textContent = fmtFull(totalRev) + " MXN";
+  } else {
+    document.getElementById("rev-bars-dash").innerHTML = `<div style="color:var(--muted);font-size:.7rem;padding:8px 0">Sin alianzas activas aún · activa venues en el Pipeline para ver revenue aquí</div>`;
+    document.getElementById("rev-total-lbl").textContent = "$0 MXN";
+  }
+
+  // Semaforo
+  const hiPri = allVenues().filter(v => (v.prio==="alianza"||v.prio==="alta") && STATE.venues[v.id]?.status==="pendiente");
+  let semaHtml = "";
+  if (hiPri.length===0) {
+    semaHtml = `<div style="color:var(--green);font-size:.7rem">✅ Todos los venues prioritarios han sido contactados</div>`;
+  } else {
+    semaHtml = `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px">`;
+    hiPri.forEach(v => {
+      semaHtml += `<div style="display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--rule);border-radius:8px;padding:10px 12px">
+        <span class="sema rojo"></span>
+        <div>
+          <div style="font-size:.72rem;font-weight:600">${v.n}</div>
+          <div style="font-size:.6rem;color:var(--muted)">${v.prio==="alianza"?"⭐ Alianza estratégica":"🔴 Alta prioridad"} · ${v.km}</div>
+        </div>
+        <button onclick="cycleStatus('${v.id}')" style="margin-left:auto;background:var(--gold-bg);border:1px solid var(--gold-bd);color:var(--gold);font-size:.6rem;padding:4px 10px;border-radius:6px;cursor:pointer;font-weight:600">Contactar →</button>
+      </div>`;
+    });
+    semaHtml += `</div>`;
+  }
+  document.getElementById("semaforo-body").innerHTML = semaHtml;
+}
+
+// ══ PIPELINE ═════════════════════════════════════════
+function cycleStatus(id) {
+  if (!STATE.venues[id]) STATE.venues[id] = {status:"pendiente",notes:"",lastContact:"",noches:0,tarifa:TARIFA_BASE,ayb:0};
+  const cur = STATE.venues[id]?.status || "pendiente";
+  const idx = STATUS_CYCLE.indexOf(cur);
+  STATE.venues[id].status = STATUS_CYCLE[(idx+1) % STATUS_CYCLE.length];
+  STATE.venues[id].lastContact = todayISO();
+  saveState();
+  renderPipeline();
+  updateHeaderStats();
+  renderDashboard();
+}
+
+function saveNote(id, val) {
+  STATE.venues[id].notes = val;
+  STATE.venues[id].lastContact = todayISO();
+  saveState();
+}
+
+function filterPipe(btn, f) {
+  PIPE_FILTER = f;
+  document.querySelectorAll(".f-btn").forEach(b=>b.classList.remove("act"));
+  btn.classList.add("act");
+  renderPipeline();
+}
+
+function renderPipeline() {
+  let data = allVenues();
+  if (PIPE_FILTER !== "ALL") data = data.filter(v => (STATE.venues[v.id]?.status||"pendiente")===PIPE_FILTER);
+  document.getElementById("pipe-count").textContent = data.length + " venues";
+
+  if (!data.length) {
+    document.getElementById("pipeline-grid").innerHTML = `<div style="color:var(--muted);font-size:.7rem;padding:20px 0">Sin venues con este estado.</div>`;
+    return;
+  }
+
+  document.getElementById("pipeline-grid").innerHTML = data.map(v => {
+    const st = STATE.venues[v.id]?.status || "pendiente";
+    const notes = STATE.venues[v.id]?.notes || "";
+    const lc = STATE.venues[v.id]?.lastContact;
+    return `<div class="pipe-card">
+      <div class="pipe-card-hd">
+        <div>
+          <div class="pipe-name">${v.n}</div>
+          <div style="display:flex;gap:5px;margin-top:5px;flex-wrap:wrap">
+            <span class="cat ${v.cat}">${v.cat==="hacienda"?"🌿 Hacienda":v.cat==="escuela"?"🏫 Escuela":"🎓 Univ."}</span>
+            <span class="prio ${v.prio}">${v.prio==="alianza"?"⭐ Alianza":v.prio==="alta"?"◆ Alta":"· Media"}</span>
+          </div>
+        </div>
+        <span class="status ${st}" onclick="cycleStatus('${v.id}')" title="Clic para cambiar estado">
+          <span class="dot"></span>${STATUS_LABELS[st]}
+        </span>
+      </div>
+      <div class="pipe-meta">
+        <div class="pipe-row">
+          <span class="pipe-row-lbl">Teléfono</span>
+          <span class="pipe-row-val">${v.tel}</span>
+        </div>
+        <div class="pipe-row">
+          <span class="pipe-row-lbl">Distancia</span>
+          <span class="pipe-row-val">${v.km}</span>
+        </div>
+        <div class="pipe-row">
+          <span class="pipe-row-lbl">Último contacto</span>
+          <span class="pipe-row-val">${lc ? dateStr(lc) : "—"}</span>
+        </div>
+        <div style="font-size:.62rem;color:var(--muted);background:var(--paper);border-radius:5px;padding:6px 8px;line-height:1.4">${v.accion}</div>
+      </div>
+      <div class="pipe-footer">
+        <input class="pipe-notes-input" placeholder="Agregar nota de contacto…" value="${notes}"
+          onchange="saveNote('${v.id}',this.value)" onblur="saveNote('${v.id}',this.value)">
+        <button onclick="addQuickTask('${v.id}','${v.n}')" style="background:none;border:1px solid var(--rule);border-radius:5px;padding:3px 8px;font-size:.6rem;cursor:pointer;color:var(--muted);white-space:nowrap" title="Crear tarea">+ Tarea</button>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+// ══ TASKS ════════════════════════════════════════════
+function populateVenueSelect() {
+  const sel = document.getElementById("t-venue");
+  sel.innerHTML = `<option value="General">General</option>` +
+    VENUES_INIT.map(v=>`<option value="${v.n}">${v.n}</option>`).join("");
+}
+
+function addTask() {
+  const title = document.getElementById("t-title").value.trim();
+  const venue = document.getElementById("t-venue").value;
+  const owner = document.getElementById("t-owner").value.trim();
+  const due   = document.getElementById("t-due").value;
+  const prio  = document.getElementById("t-prio").value;
+  if (!title) { toast("Escribe el título de la tarea"); return; }
+  STATE.tasks.push({
+    id: Date.now()+"", title, venue, owner: owner||"Sin asignar",
+    due, prio, done: false, created: todayISO()
+  });
+  document.getElementById("t-title").value = "";
+  saveState();
+  renderTasks();
+  updateHeaderStats();
+}
+
+function addQuickTask(venueId, venueName) {
+  const title = prompt("¿Qué tarea quieres agregar para "+venueName+"?");
+  if (!title) return;
+  STATE.tasks.push({
+    id: Date.now()+"", title, venue: venueName,
+    owner: "Equipo Ventas", due: "", prio: "alta",
+    done: false, created: todayISO()
+  });
+  saveState();
+  updateHeaderStats();
+  toast("Tarea agregada ✓");
+}
+
+function toggleTask(id) {
+  const t = STATE.tasks.find(t=>t.id===id);
+  if (t) { t.done = !t.done; saveState(); renderTasks(); updateHeaderStats(); }
+}
+
+function deleteTask(id) {
+  STATE.tasks = STATE.tasks.filter(t=>t.id!==id);
+  saveState(); renderTasks(); updateHeaderStats();
+}
+
+function filterTasks(btn, f) {
+  TASK_FILTER = f;
+  document.querySelectorAll("#page-tareas .f-btn").forEach(b=>b.classList.remove("act"));
+  btn.classList.add("act");
+  renderTasks();
+}
+
+function renderTasks() {
+  let data = [...STATE.tasks];
+  if (TASK_FILTER==="done")    data = data.filter(t=>t.done);
+  else if (TASK_FILTER!=="ALL") data = data.filter(t=>!t.done && t.prio===TASK_FILTER);
+  else data = data.filter(t=>!t.done);
+  data.sort((a,b) => {
+    const ap = a.prio==="urgente"?0:a.prio==="alta"?1:2;
+    const bp = b.prio==="urgente"?0:b.prio==="alta"?1:2;
+    if (ap!==bp) return ap-bp;
+    return new Date(a.due||"9999")-new Date(b.due||"9999");
+  });
+  document.getElementById("task-count").textContent = data.length + " tareas";
+  if (!data.length) {
+    document.getElementById("tasks-list").innerHTML = `<div style="color:var(--muted);font-size:.7rem;padding:16px 0">Sin tareas en esta categoría ✅</div>`;
+    return;
+  }
+  document.getElementById("tasks-list").innerHTML = data.map(t => {
+    const d = daysUntil(t.due);
+    const dcls = !t.due?"ok":d<0?"overdue":d<=2?"soon":"ok";
+    const dlbl = !t.due?"Sin fecha":d<0?"Vencida hace "+Math.abs(d)+"d":d===0?"Hoy":d===1?"Mañana":"En "+d+" días";
+    return `<div class="task${t.done?" done":""} ${t.prio}">
+      <div class="task-cb${t.done?" checked":""}" onclick="toggleTask('${t.id}')">${t.done?"✓":""}</div>
+      <div>
+        <div class="task-title">${t.title}</div>
+        <div class="task-venue">${t.venue}</div>
+      </div>
+      <div class="task-owner">${t.owner}</div>
+      <div class="task-due ${dcls}">${dlbl}</div>
+      <div>${TASK_PRIO_LABEL[t.prio]||""}</div>
+      <button class="task-del" onclick="deleteTask('${t.id}')">✕</button>
+    </div>`;
+  }).join("");
+}
+
+// ══ REVENUE ══════════════════════════════════════════
+function updateRevenue(id, field, val) {
+  const n = parseFloat(val)||0;
+  if (!STATE.venues[id]) STATE.venues[id] = {status:"pendiente",notes:"",lastContact:"",noches:0,tarifa:TARIFA_BASE,ayb:0};
+  STATE.venues[id][field] = n;
+  saveState(); renderRevenue(); updateHeaderStats();
+}
+
+function set$(id, v){ const el=document.getElementById(id); if(el) el.textContent=v; }
+
+function renderRevenue() {
+  const goalIH  = parseFloat(document.getElementById("goal-ih")?.value)  || 15000000;
+  const goalAYB = parseFloat(document.getElementById("goal-ayb")?.value) || 5000000;
+
+  let totCN=0, totIH=0, totAYB=0, totRev=0;
+  let activosIH=0, activosAYB=0;
+
+  const allV = allVenues().filter(v => v.metaNoches > 0 || (STATE.customVenues||[]).includes(v));
+  const rows = allVenues().map(v => {
+    const st   = STATE.venues[v.id]?.status || "pendiente";
+    const cn   = parseInt(STATE.venues[v.id]?.noches||0);
+    const tp   = parseInt(STATE.venues[v.id]?.tarifa||TARIFA_BASE);
+    const ih   = cn * tp;
+    const ayb  = parseInt(STATE.venues[v.id]?.ayb||0);
+    const tot  = ih + ayb;
+    totCN+=cn; totIH+=ih; totAYB+=ayb; totRev+=tot;
+    if(ih>0)  activosIH++;
+    if(ayb>0) activosAYB++;
+
+    const canEdit = st==="activo"||st==="negociando";
+    const pctIH = v.metaNoches>0 ? Math.min(100,Math.round(cn/v.metaNoches*100)) : 0;
+    const barC  = pctIH>=80?"var(--green)":pctIH>=40?"var(--gold)":"var(--soft)";
+    const isCustom = (STATE.customVenues||[]).find(cv=>cv.id===v.id);
+
+    const riStyle = "background:none;border:none;border-bottom:1.5px dashed var(--rule);font-family:JetBrains Mono,monospace;font-size:.67rem;color:var(--ink2);width:70px;text-align:right;outline:none;padding:2px 3px;transition:border-color .15s";
+    const cnF  = canEdit ? `<input style="${riStyle}" type="number" value="${cn}" onchange="updateRevenue('${v.id}','noches',this.value)" title="CN">` : `<span style="font-family:JetBrains Mono,monospace;font-size:.67rem;color:var(--muted)">${cn}</span>`;
+    const tpF  = canEdit ? `<input style="${riStyle}" type="number" value="${tp}" onchange="updateRevenue('${v.id}','tarifa',this.value)" title="TP">` : `<span style="font-family:JetBrains Mono,monospace;font-size:.67rem;color:var(--muted)">${tp.toLocaleString()}</span>`;
+    const aybF = canEdit ? `<input style="${riStyle}" type="number" value="${ayb}" onchange="updateRevenue('${v.id}','ayb',this.value)" title="A&B">` : `<span style="font-family:JetBrains Mono,monospace;font-size:.67rem;color:var(--muted)">${ayb>0?fmtFull(ayb):"—"}</span>`;
+
+    return `<tr>
+      <td style="font-size:.7rem;font-weight:600;max-width:190px">
+        ${v.n}${isCustom?` <span class="custom-tag">+ custom</span>`:""}
+        <br><span class="cat ${v.cat||"otro"}" style="margin-top:3px;display:inline-block">${v.cat||"otro"}</span>
+      </td>
+      <td><span class="status ${st}" onclick="cycleStatus('${v.id}')" title="Clic para cambiar"><span class="dot"></span>${STATUS_LABELS[st]}</span></td>
+      <td class="r">${cnF}</td>
+      <td class="r">${tpF}</td>
+      <td class="r" style="font-family:JetBrains Mono,monospace;font-size:.67rem;font-weight:${ih>0?600:400};color:${ih>0?"var(--blue)":"var(--muted)"}">${ih>0?fmtFull(ih):"—"}</td>
+      <td class="r">${aybF}</td>
+      <td class="r" style="font-family:JetBrains Mono,monospace;font-size:.7rem;font-weight:700;color:${tot>0?"var(--gold)":"var(--muted)"}">${tot>0?fmtFull(tot):"—"}</td>
+      <td style="min-width:90px">
+        <div style="height:7px;background:var(--paper2);border-radius:3px;overflow:hidden">
+          <div style="height:100%;width:${pctIH}%;background:${barC};border-radius:3px;transition:width .4s"></div>
+        </div>
+        <div style="font-size:.57rem;color:var(--muted);margin-top:2px">${cn.toLocaleString()} / ${v.metaNoches.toLocaleString()} nts · ${pctIH}%</div>
+      </td>
+    </tr>`;
+  });
+
+  document.getElementById("rev-tbody").innerHTML = rows.join("");
+
+  // Footer
+  set$("rev-tot-cn",  totCN.toLocaleString());
+  set$("rev-tot-ih",  totIH>0?fmtFull(totIH):"$0");
+  set$("rev-tot-ayb", totAYB>0?fmtFull(totAYB):"$0");
+  set$("rev-tot-mxn", totRev>0?fmtFull(totRev):"$0");
+
+  // KPIs
+  set$("rev-ih-kpi",  totIH>0?fmt(totIH):"$0");
+  set$("rev-ayb-kpi", totAYB>0?fmt(totAYB):"$0");
+  set$("rev-mxn",     totRev>0?fmt(totRev):"$0");
+  set$("rev-noches",  totCN.toLocaleString());
+
+  // META IH
+  const pIH = Math.min(100, totIH>0 ? Math.round(totIH/goalIH*100) : 0);
+  const restIH = Math.max(0, goalIH-totIH);
+  set$("meta-ih-ach",    totIH>0?fmtFull(totIH):"$0");
+  set$("meta-ih-rest",   restIH>0?fmt(restIH):"✓");
+  set$("meta-ih-pct",    pIH+"%");
+  set$("meta-ih-of",     "de $"+goalIH.toLocaleString("es-MX"));
+  set$("meta-ih-activos",activosIH);
+  set$("meta-ih-cn",     totCN.toLocaleString());
+  set$("meta-ih-tp",     totCN>0?"$"+(Math.round(totIH/totCN)).toLocaleString("es-MX"):"—");
+  set$("meta-ih-avg",    activosIH>0?fmt(Math.round(totIH/activosIH)):"—");
+  const barIH = document.getElementById("meta-ih-bar");
+  if(barIH) barIH.style.width = pIH+"%";
+
+  // META AYB
+  const pAYB = Math.min(100, totAYB>0 ? Math.round(totAYB/goalAYB*100) : 0);
+  const restAYB = Math.max(0, goalAYB-totAYB);
+  set$("meta-ayb-ach",    totAYB>0?fmtFull(totAYB):"$0");
+  set$("meta-ayb-rest",   restAYB>0?fmt(restAYB):"✓");
+  set$("meta-ayb-pct",    pAYB+"%");
+  set$("meta-ayb-of",     "de $"+goalAYB.toLocaleString("es-MX"));
+  set$("meta-ayb-activos",activosAYB);
+  set$("meta-ayb-avg",    activosAYB>0?fmt(Math.round(totAYB/activosAYB)):"—");
+  set$("meta-ayb-ratio",  totIH>0?Math.round(totAYB/totIH*100)+"%":"—");
+  set$("meta-ayb-total",  totRev>0?fmtFull(totRev):"$0");
+  const barAYB = document.getElementById("meta-ayb-bar");
+  if(barAYB) barAYB.style.width = pAYB+"%";
+}
+
+// ══ REVISIÓN SEMANAL ═════════════════════════════════
+function renderRevision() {
+  const s = getStats();
+  const overdue = STATE.tasks.filter(t=>!t.done&&daysUntil(t.due)<0);
+  const thisWeek = STATE.tasks.filter(t=>!t.done&&daysUntil(t.due)>=0&&daysUntil(t.due)<=7);
+
+  document.getElementById("revision-cards").innerHTML = `
+    <div class="rev-card">
+      <div class="rev-card-hd"><span class="rev-card-title">📊 Resumen de pipeline</span></div>
+      <div class="rev-card-body" style="display:flex;flex-direction:column;gap:8px">
+        ${STATUS_CYCLE.filter(st=>st!=="descartado").map(st=>{
+          const cnt = VENUES_INIT.filter(v=>(STATE.venues[v.id]?.status||"pendiente")===st).length;
+          return `<div style="display:flex;align-items:center;justify-content:space-between">
+            <span class="status ${st}" style="cursor:default"><span class="dot"></span>${STATUS_LABELS[st]}</span>
+            <span style="font-family:JetBrains Mono,monospace;font-size:.85rem;font-weight:600;color:var(--ink)">${cnt}</span>
+          </div>`;
+        }).join("")}
+      </div>
+    </div>
+    <div class="rev-card">
+      <div class="rev-card-hd"><span class="rev-card-title">✅ Tareas esta semana</span></div>
+      <div class="rev-card-body" style="display:flex;flex-direction:column;gap:6px">
+        <div style="display:flex;justify-content:space-between;font-size:.72rem"><span style="color:var(--red)">🔴 Vencidas</span><span style="font-family:JetBrains Mono,monospace;font-weight:600">${overdue.length}</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:.72rem"><span style="color:var(--amber)">🟡 Esta semana</span><span style="font-family:JetBrains Mono,monospace;font-weight:600">${thisWeek.length}</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:.72rem"><span style="color:var(--green)">✅ Completadas</span><span style="font-family:JetBrains Mono,monospace;font-weight:600">${STATE.tasks.filter(t=>t.done).length}</span></div>
+      </div>
+    </div>
+    <div class="rev-card">
+      <div class="rev-card-hd"><span class="rev-card-title">💰 Revenue acumulado</span></div>
+      <div class="rev-card-body">
+        <div style="font-family:DM Serif Display,serif;font-size:2rem;color:var(--gold)">${fmt(s.rev)}</div>
+        <div style="font-size:.65rem;color:var(--muted);margin-top:4px">MXN · ${s.noches} noches confirmadas</div>
+        <div class="bar-wrap" style="margin-top:10px;height:8px">
+          <div class="bar-fill gold" style="width:${Math.min(100,Math.round(s.rev/15000000*100))}%"></div>
+        </div>
+        <div style="font-size:.6rem;color:var(--muted);margin-top:3px">${Math.round(s.rev/15000000*100)}% de meta $15M MXN</div>
+      </div>
+    </div>
+  `;
+
+  // Compromisos = tareas de esta semana
+  document.getElementById("revision-compromisos").innerHTML = thisWeek.length
+    ? thisWeek.map(t=>`
+        <div style="background:#fff;border:1px solid var(--rule);border-left:3px solid ${t.prio==="urgente"?"var(--red)":t.prio==="alta"?"var(--amber)":"var(--blue)"};border-radius:0 8px 8px 0;padding:10px 14px;margin-bottom:8px;display:flex;gap:12px;align-items:center">
+          <div style="flex:1"><div style="font-size:.73rem;font-weight:500">${t.title}</div><div style="font-size:.62rem;color:var(--muted)">${t.venue} · Resp: <strong>${t.owner}</strong></div></div>
+          <div style="font-family:JetBrains Mono,monospace;font-size:.62rem;color:${daysUntil(t.due)<0?"var(--red)":daysUntil(t.due)<=2?"var(--amber)":"var(--muted)"}">${t.due ? dateStr(t.due) : "—"}</div>
+        </div>`).join("")
+    : `<div style="color:var(--green);font-size:.7rem;padding:12px 0">✅ Sin compromisos pendientes esta semana</div>`;
+
+  // Sin contactar alta prioridad
+  const urgentes = allVenues().filter(v=>(v.prio==="alianza"||v.prio==="alta")&&(STATE.venues[v.id]?.status||"pendiente")==="pendiente");
+  document.getElementById("revision-urgente").innerHTML = urgentes.length
+    ? urgentes.map(v=>`
+        <div style="display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--rule);border-radius:8px;padding:10px 12px;margin-bottom:7px">
+          <span class="sema rojo"></span>
+          <div style="flex:1"><div style="font-size:.73rem;font-weight:600">${v.n}</div><div style="font-size:.62rem;color:var(--muted)">${v.tel} · ${v.km}</div></div>
+          <div style="font-size:.62rem;color:var(--muted);max-width:200px">${v.accion}</div>
+        </div>`).join("")
+    : `<div style="color:var(--green);font-size:.7rem;padding:12px 0">✅ Todos los venues prioritarios han sido contactados</div>`;
+
+  // Últimas notas
+  const conNotas = allVenues()
+    .filter(v=>STATE.venues[v.id]?.notes?.trim())
+    .sort((a,b)=>new Date(STATE.venues[b.id]?.lastContact||0)-new Date(STATE.venues[a.id]?.lastContact||0))
+    .slice(0,6);
+  document.getElementById("revision-notas").innerHTML = conNotas.length
+    ? conNotas.map(v=>`
+        <div style="background:#fff;border:1px solid var(--rule);border-radius:8px;padding:10px 14px;margin-bottom:7px">
+          <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+            <span style="font-size:.72rem;font-weight:600">${v.n}</span>
+            <span class="status ${STATE.venues[v.id]?.status||"pendiente"}" style="cursor:default;font-size:.55rem"><span class="dot"></span>${STATUS_LABELS[STATE.venues[v.id]?.status||"pendiente"]}</span>
+          </div>
+          <div style="font-size:.67rem;color:var(--ink2)">${STATE.venues[v.id]?.notes}</div>
+          <div style="font-size:.58rem;color:var(--muted);margin-top:4px">${STATE.venues[v.id]?.lastContact?dateStr(STATE.venues[v.id].lastContact):""}</div>
+        </div>`).join("")
+    : `<div style="color:var(--muted);font-size:.7rem;padding:12px 0">Sin notas registradas aún</div>`;
+}
+
+function copyRevision() {
+  const s = getStats();
+  const lines = [
+    `📊 REVISIÓN SEMANAL — GFA SUMIYA ALIANZAS`,
+    `📅 ${weekLabel()}`,
+    ``,
+    `PIPELINE`,
+    `✅ Alianzas activas: ${s.activas}`,
+    `🟡 En negociación: ${s.neg}`,
+    `🔵 Contactados: ${s.cont}`,
+    `⚪ Sin contactar: ${s.pend}`,
+    ``,
+    `💰 Revenue acumulado: ${fmt(s.rev)} MXN (${s.noches} noches)`,
+    ``,
+    `TAREAS VENCIDAS: ${s.tasksOverdue}`,
+    STATE.tasks.filter(t=>!t.done&&daysUntil(t.due)<0).map(t=>`  • ${t.title} — ${t.owner}`).join("\n"),
+    ``,
+    `VENUES SIN CONTACTAR (alta prioridad):`,
+    VENUES_INIT.filter(v=>(v.prio==="alianza"||v.prio==="alta")&&(STATE.venues[v.id]?.status||"pendiente")==="pendiente")
+      .map(v=>`  • ${v.n} (${v.tel})`).join("\n"),
+  ].join("\n");
+  navigator.clipboard.writeText(lines).then(()=>toast("Copiado al portapapeles ✓"));
+}
+
+// ══ MODAL NUEVA ALIANZA ══════════════════════════════
+function openModal() {
+  document.getElementById("modal-alianza").classList.remove("hidden");
+  document.getElementById("m-nombre").focus();
+}
+function closeModal() {
+  document.getElementById("modal-alianza").classList.add("hidden");
+  ["m-nombre","m-tel","m-km","m-meta","m-email","m-accion"].forEach(id=>{
+    const el=document.getElementById(id); if(el) el.value="";
+  });
+}
+document.addEventListener("keydown", e=>{ if(e.key==="Escape") closeModal(); });
+
+function saveCustomVenue() {
+  const nombre = document.getElementById("m-nombre").value.trim();
+  if (!nombre) { alert("Escribe el nombre del venue o cliente."); return; }
+  const cat    = document.getElementById("m-cat").value;
+  const prio   = document.getElementById("m-prio").value;
+  const tel    = document.getElementById("m-tel").value.trim() || "—";
+  const km     = document.getElementById("m-km").value.trim()  || "—";
+  const meta   = parseInt(document.getElementById("m-meta").value)||0;
+  const accion = document.getElementById("m-accion").value.trim() || "Seguimiento pendiente";
+
+  const id = "custom-" + Date.now();
+  const venue = {id, n:nombre, cat, prio, tel, km, metaNoches:meta, accion, custom:true};
+
+  if (!STATE.customVenues) STATE.customVenues = [];
+  STATE.customVenues.push(venue);
+  STATE.venues[id] = {status:"pendiente", notes:"", lastContact:"", noches:0, tarifa:TARIFA_BASE, ayb:0};
+
+  saveState();
+  closeModal();
+  toast("Alianza agregada: "+nombre+" ✓");
+
+  // Refrescar la página actual
+  const activePage = document.querySelector(".page.act");
+  if (activePage) {
+    const pid = activePage.id.replace("page-","");
+    if(pid==="pipeline")  renderPipeline();
+    if(pid==="revenue")   renderRevenue();
+    if(pid==="dashboard") renderDashboard();
+  }
+  updateHeaderStats();
+}
+
+// ══ AUTH ══════════════════════════════════════════════
+window.doLogin = async function() {
+  const email = document.getElementById("li-email").value.trim();
+  const pass  = document.getElementById("li-pass").value;
+  const btn   = document.getElementById("li-btn");
+  const err   = document.getElementById("li-err");
+  if(!email||!pass){ err.textContent="Completa todos los campos."; return; }
+  btn.disabled=true; btn.textContent="Verificando…"; err.textContent="";
+  try {
+    await signInWithEmailAndPassword(_auth, email, pass);
+  } catch(e) {
+    btn.disabled=false; btn.textContent="Iniciar sesión";
+    const msgs = {
+      "auth/invalid-credential":"Correo o contraseña incorrectos.",
+      "auth/user-not-found":"Usuario no encontrado.",
+      "auth/wrong-password":"Contraseña incorrecta.",
+      "auth/too-many-requests":"Demasiados intentos. Espera unos minutos.",
+      "auth/invalid-email":"Correo inválido.",
+    };
+    err.textContent = msgs[e.code] || ("Error: "+e.code);
+  }
+};
+
+window.doRegistro = async function() {
+  const email = document.getElementById("reg-email").value.trim();
+  const pass  = document.getElementById("reg-pass").value;
+  const btn   = document.getElementById("reg-btn");
+  const err   = document.getElementById("reg-err");
+  if(!email||!pass){ err.textContent="Completa todos los campos."; return; }
+  btn.disabled=true; btn.textContent="Creando cuenta…"; err.textContent="";
+  try {
+    await createUserWithEmailAndPassword(_auth, email, pass);
+  } catch(e) {
+    btn.disabled=false; btn.textContent="Crear cuenta";
+    const msgs = {
+      "auth/email-already-in-use":"Este correo ya está registrado.",
+      "auth/weak-password":"La contraseña debe tener al menos 6 caracteres.",
+      "auth/invalid-email":"Correo inválido.",
+    };
+    err.textContent = msgs[e.code] || ("Error: "+e.code);
+  }
+};
+
+window.doLogout = async function() {
+  if(_unsubscribe) _unsubscribe();
+  await signOut(_auth);
+};
+
+window.toggleForm = function(mode) {
+  document.getElementById("form-login").style.display   = mode==="login"  ? "block" : "none";
+  document.getElementById("form-registro").style.display = mode==="registro"? "block" : "none";
+};
+
+onAuthStateChanged(_auth, (user) => {
+  if (user) {
+    document.getElementById("login-screen").style.display = "none";
+    document.getElementById("app-screen").style.display   = "block";
+    document.getElementById("hdr-username").textContent   = user.email.split("@")[0];
+    document.getElementById("hdr-week").textContent       = weekLabel();
+    populateVenueSelect();
+    const def = new Date(); def.setDate(def.getDate()+7);
+    document.getElementById("t-due").value = def.toISOString().slice(0,10);
+    subscribeFirestore();
+  } else {
+    if(_unsubscribe) _unsubscribe();
+    document.getElementById("login-screen").style.display = "flex";
+    document.getElementById("app-screen").style.display   = "none";
+    const btn = document.getElementById("li-btn");
+    if(btn){ btn.disabled=false; btn.textContent="Iniciar sesión"; }
+  }
+});
+
+document.getElementById("li-pass")?.addEventListener("keydown", e=>{ if(e.key==="Enter") window.doLogin(); });
+document.getElementById("li-email")?.addEventListener("keydown", e=>{ if(e.key==="Enter") document.getElementById("li-pass").focus(); });
+</script>
+</body>
+</html>

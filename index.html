@@ -596,56 +596,7 @@ main {
 .meta2-stat-row{display:flex;justify-content:space-between;font-size:.65rem;margin-bottom:5px}
 .meta2-stat-lbl{color:var(--muted)}.meta2-stat-val{font-family:"JetBrains Mono",monospace;font-weight:600}
 
-/* ── RESPONSIVE ESCRITORIO (sin cambios) ─────────────── */
-@media(max-width:1100px) { .g4,.g5{grid-template-columns:1fr 1fr} .g3{grid-template-columns:1fr 1fr} }
-@media(max-width:750px)  { .g2,.g3,.g4,.g5{grid-template-columns:1fr} .add-form{grid-template-columns:1fr 1fr} }
-
-/* ── RESPONSIVE MÓVIL ────────────────────────────────── */
-@media(max-width:480px) {
-  /* Header compacto */
-  header { padding: 0 12px; flex-wrap: wrap; }
-  .hdr-brand { padding: 10px 0; border-right: none; width: 100%; }
-  .hdr-title { font-size: 1.1rem; }
-  .hdr-meta { padding: 0 0 10px; gap: 10px; flex-wrap: wrap; overflow-x: auto; }
-  .hdr-stat-val { font-size: 1.1rem; }
-  .hdr-week { font-size: .6rem; padding: 6px 10px; }
-
-  /* Nav con scroll horizontal */
-  nav { padding: 0 8px; }
-  .nav-btn { padding: 10px 12px; font-size: .62rem; }
-
-  /* Main con menos padding */
-  main { padding: 14px 12px 60px; }
-
-  /* Grids a una columna */
-  .g2,.g3,.g4,.g5,.meta2-grid { grid-template-columns: 1fr !important; }
-
-  /* Formulario tareas en 1 columna */
-  .add-form { grid-template-columns: 1fr !important; }
-
-  /* Pipeline: cards a ancho completo */
-  #pipeline-grid { grid-template-columns: 1fr !important; }
-
-  /* Revenue: tabla con scroll horizontal */
-  .rev-card-body { overflow-x: auto; }
-  .rev-table { min-width: 600px; }
-
-  /* Tasks: ajuste de columnas */
-  .task { grid-template-columns: 22px 1fr auto; }
-  .task-owner, .task-due { display: none; }
-
-  /* Modal a pantalla completa */
-  .modal { width: 96vw; }
-  .modal-body { grid-template-columns: 1fr !important; }
-  .modal-body .full { grid-column: span 1 !important; }
-
-  /* Login box más angosto */
-  #login-screen > div { width: 92vw; padding: 28px 20px; }
-
-  /* KPI más compactos */
-  .kpi-val { font-size: 1.6rem; }
-  .kpi { padding: 12px 14px; }
-}
+</style>
 </style>
 </head>
 <body>
@@ -1885,6 +1836,22 @@ onAuthStateChanged(_auth, (user) => {
 
 document.getElementById("li-pass")?.addEventListener("keydown", e=>{ if(e.key==="Enter") window.doLogin(); });
 document.getElementById("li-email")?.addEventListener("keydown", e=>{ if(e.key==="Enter") document.getElementById("li-pass").focus(); });
+
+// ══ EXPONER FUNCIONES AL HTML (requerido por type="module") ══
+window.showPage       = showPage;
+window.cycleStatus    = cycleStatus;
+window.saveNote       = saveNote;
+window.filterPipe     = filterPipe;
+window.addTask        = addTask;
+window.addQuickTask   = addQuickTask;
+window.toggleTask     = toggleTask;
+window.deleteTask     = deleteTask;
+window.filterTasks    = filterTasks;
+window.updateRevenue  = updateRevenue;
+window.copyRevision   = copyRevision;
+window.openModal      = openModal;
+window.closeModal     = closeModal;
+window.saveCustomVenue= saveCustomVenue;
 </script>
 </body>
 </html>
